@@ -44,3 +44,7 @@ To build and serve the site locally, run:
 ```sh
 bundle exec jekyll serve
 ```
+or 
+```
+./tools/run.sh
+```
