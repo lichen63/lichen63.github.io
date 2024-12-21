@@ -12,7 +12,8 @@ order: 4
 - **Gender**: Male
 - **Birth**: 1993.06.03
 - **Degree**: Bachelor of Computer Science and Technology in Southeast University
-- **GitHub**: https://github.com/liu-lichen
+- **GitHub**: https://github.com/lichen63
+- **Email**: liu.lichen63@gmail.com
 
 ---
 
