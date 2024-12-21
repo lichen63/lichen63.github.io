@@ -48,3 +48,7 @@ or
 ```
 ./tools/run.sh
 ```
+
+## Tools
+
+- PNG to ICO: https://favicon.io/favicon-converter/
