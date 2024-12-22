@@ -51,4 +51,6 @@ or
 
 ## Tools
 
-- PNG to ICO: https://favicon.io/favicon-converter/
+- PNG to ICO
+  - https://favicon.io/favicon-converter/
+  - https://realfavicongenerator.net
