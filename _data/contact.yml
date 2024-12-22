@@ -9,6 +9,10 @@
   noblank: true # open link in current tab
   url: 'mailto:liu.lichen63@gmail.com'
 
+- type: twitter
+  icon: "fa-brands fa-x-twitter"
+  url:  'https://x.com/Lichen369/'
+
 - type: linkedin
   icon: "fab fa-linkedin"   # icons powered by <https://fontawesome.com/>
   url:  'https://www.linkedin.com/in/lichen-liu/'
@@ -18,9 +22,6 @@
 # - type: rss
 #   icon: "fas fa-rss"
 #   noblank: true
-#
-# - type: twitter
-#   icon: "fa-brands fa-x-twitter"
 #
 # - type: mastodon
 #   icon: 'fab fa-mastodon'   # icons powered by <https://fontawesome.com/>
