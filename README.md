@@ -49,6 +49,11 @@ or
 ./tools/run.sh
 ```
 
+To run with draft docs, run:
+```sh
+bundle exec jekyll serve --drafts
+```
+
 ## Tools
 
 - PNG to ICO
