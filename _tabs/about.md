@@ -11,8 +11,8 @@ order: 4
 - **Name**: Lichen Liu
 - **Gender**: Male
 - **Birth**: 1993.06.03
-- **Degree**: Bachelor of Computer Science and Technology in Southeast University
-- **GitHub**: https://github.com/lichen63
+- **Degree**: Bachelor of Computer Science and Technology in [Southeast University](https://www.seu.edu.cn)
+- **GitHub**: [Lichen63](https://github.com/lichen63)
 - **Email**: liu.lichen63@gmail.com
 
 ---
