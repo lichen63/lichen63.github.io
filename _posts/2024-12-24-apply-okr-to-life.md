@@ -6,6 +6,7 @@ date: 2024-12-24 06:00:00 +0800
 categories: [杂记, 方法论]
 tags: [方法论]
 pin: false
+published: true
 media_subpath: '/assets/posts/20241224'
 ---
 
