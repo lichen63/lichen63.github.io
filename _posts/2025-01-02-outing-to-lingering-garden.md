@@ -1,6 +1,6 @@
 ---
 title: 留园半日游
-description: 全家一起出发去苏州留园半日游
+description: 苏州留园半日游 闹中有静山水树
 author: Lichen
 date: 2025-01-02 8:00:00 +0800
 categories: [游记, 苏州]
