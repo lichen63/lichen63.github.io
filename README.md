@@ -59,3 +59,5 @@ bundle exec jekyll serve --drafts
 - PNG to ICO
   - https://favicon.io/favicon-converter/
   - https://realfavicongenerator.net
+- Compress images
+  - https://github.com/lichen63/script-tools/blob/main/compress_image.py
