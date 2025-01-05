@@ -13,7 +13,6 @@ media_subpath: '/assets/posts/20250103'
 <style>
     img {
         width: 300px;
-        height: 200px;
     }
 </style>
 
