@@ -8,15 +8,6 @@
 
 Lichen's portal website containing thoughts, blogs, and various projects. This site is built using Jekyll and the Chirpy theme.
 
-## Features
-
-- Blog posts with categories and tags
-- Author information and social links
-- Table of Contents for posts
-- Comments enabled on posts
-- SEO optimized with Twitter Cards
-- Responsive design
-
 ## Installation
 
 1. Clone the repository:
