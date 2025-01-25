@@ -149,4 +149,4 @@ media_subpath: '/assets/posts/20250114'
 
 ## 4. 后续
 
-后续的方法论和其它一些整理就放到下一篇文章了。
+后续的方法论和其它一些整理就放到[下一篇文章]({{ site.baseurl }}/posts/summary-of-yunfan-talk-2)了。

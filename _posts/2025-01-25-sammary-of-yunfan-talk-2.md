@@ -2,12 +2,12 @@
 title: 听后感之张云帆的谈话（二）
 description: 记录我对知行小酒馆里张云帆两次谈话的理解
 author: Lichen
-date: 2025-01-15 07:00:00 +0800
+date: 2025-01-25 22:00:00 +0800
 categories: [杂记, 播客]
 tags: [杂记, 播客, 听后感]
 pin: false
 published: true
-media_subpath: '/assets/posts/20250115'
+media_subpath: '/assets/posts/20250125'
 ---
 
 <style>
