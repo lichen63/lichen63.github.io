@@ -10,12 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Exit if this is not Public Repository
+      if: ${{ github.repository_owner == 'lichen63' && github.repository == 'lichen63/lichen63.github.io' }}
+      run: echo "Not running in Public Repository. Exiting..." && exit 0
+
     - name: Checkout Current Repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Push to Private Repository
       run: |
-        git config --global user.name "Lichen-SyncBot"
-        git config --global user.email "liu.lichen63@gmail.com"
+        git config --global user.name "SyncBot from Public Repo"
+        git config --global user.email "syncbot@github-actions.github.io"
         git remote add PrivateRepo https://x-access-token:${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}@github.com/lichen63/lichen63.github.io-private.git
-        git push --mirror PrivateRepo
+        for i in {1..3}; do
+          git push --force PrivateRepo main && break || echo "Retrying ($i)..."
+          sleep 5
+        done
