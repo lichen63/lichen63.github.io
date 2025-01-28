@@ -19,6 +19,11 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Verify Token Access
+      run: |
+        echo "Verifying token access..."
+        curl -H "Authorization: token ${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}" https://api.github.com/repos/lichen63/lichen63.github.io-private
+
     - name: Remove Workflow Files Before Sync
       run: |
         rm -rf .github/workflows
