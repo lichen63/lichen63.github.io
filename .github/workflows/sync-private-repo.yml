@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Exit if this is not Public Repository
-      if: ${{ github.repository_owner == 'lichen63' && github.repository == 'lichen63/lichen63.github.io' }}
+      if: ${{ github.repository != 'lichen63/lichen63.github.io' }}
       run: echo "Not running in Public Repository. Exiting..." && exit 0
 
     - name: Checkout Current Repository
