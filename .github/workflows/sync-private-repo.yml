@@ -1,0 +1,21 @@
+name: Sync to Private Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Current Repository
+      uses: actions/checkout@v3
+
+    - name: Push to Private Repository
+      run: |
+        git config --global user.name "Lichen-SyncBot"
+        git config --global user.email "liu.lichen63@gmail.com"
+        git remote add PrivateRepo https://x-access-token:${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}@github.com/lichen63/lichen63.github.io-private.git
+        git push --mirror PrivateRepo
