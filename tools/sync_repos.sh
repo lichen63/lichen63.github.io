@@ -26,70 +26,36 @@ pull_latest_changes() {
   git -C "$REPO_PRIVATE_PATH" pull
 }
 
-# Compare and sync changes from the public repo to the private repo
-sync_changes() {
-  echo "Checking for differences between public and private repositories..."
+# Sync commits from public repo to private repo (only unpushed commits)
+sync_commits() {
+  echo "Checking for unpushed commits in the public repo..."
 
-  DIFF=$(git -C "$REPO_PUBLIC_PATH" diff --name-status --ignore-submodules -- ':!*.github')
+  # Fetch the latest changes from the public repo
+  git -C "$REPO_PUBLIC_PATH" fetch origin
 
-  # Check if there are any differences
-  if [ -z "$DIFF" ]; then
-    echo "No changes detected between the repositories."
+  # Find unpushed commits in the public repo
+  UNPUSHED_COMMITS=$(git -C "$REPO_PUBLIC_PATH" log origin/main..HEAD --oneline)
+
+  if [ -z "$UNPUSHED_COMMITS" ]; then
+    echo "No unpushed commits detected."
     return 0
   fi
 
-  echo "Diff output: $DIFF"
+  echo "Unpushed commits found:"
+  echo "$UNPUSHED_COMMITS"
 
-  while IFS=$'\t' read -r status file_path; do
-    # Handle case where file_path is empty (could happen if diff format is unexpected)
-    if [ -z "$file_path" ]; then
-      echo "Unknown status for file."
-      continue
-    fi
+  # Check out to the private repo and merge unpushed commits
+  git -C "$REPO_PRIVATE_PATH" checkout main
+  git -C "$REPO_PRIVATE_PATH" fetch origin
 
-    echo "Processing file: $file_path (Status: $status)"
+  # Cherry-pick each unpushed commit into the private repo
+  while IFS= read -r commit_hash; do
+    COMMIT_ID=$(echo $commit_hash | awk '{print $1}')
+    echo "Cherry-picking commit $COMMIT_ID into private repo..."
+    git -C "$REPO_PRIVATE_PATH" cherry-pick "$COMMIT_ID"
+  done <<< "$UNPUSHED_COMMITS"
 
-    case "$status" in
-      A)  # Added files
-        echo "Adding file $file_path to private repo..."
-        git -C "$REPO_PRIVATE_PATH" checkout main
-        cp "$REPO_PUBLIC_PATH/$file_path" "$REPO_PRIVATE_PATH/$file_path"
-        ;;
-      D)  # Deleted files
-        echo "Removing file $file_path from private repo..."
-        git -C "$REPO_PRIVATE_PATH" rm "$file_path"
-        ;;
-      M)  # Modified files
-        echo "Updating file $file_path in private repo..."
-        git -C "$REPO_PRIVATE_PATH" checkout main
-        cp "$REPO_PUBLIC_PATH/$file_path" "$REPO_PRIVATE_PATH/$file_path"
-        ;;
-      R)  # Renamed files
-        echo "Renaming file $file_path in private repo..."
-        git -C "$REPO_PRIVATE_PATH" mv "$REPO_PRIVATE_PATH/$(basename "$file_path")" "$file_path"
-        ;;
-      C)  # Copied files
-        echo "Copying file $file_path to private repo..."
-        cp "$REPO_PUBLIC_PATH/$file_path" "$REPO_PRIVATE_PATH/$file_path"
-        ;;
-      U)  # Unmerged files (manual conflict resolution required)
-        echo "Unmerged file: $file_path. Please resolve conflicts manually."
-        ;;
-      ??)  # Untracked files
-        echo "Untracked file: $file_path. Consider adding it to version control."
-        ;;
-      *)
-        echo "Unknown status: $status for file $file_path"
-        ;;
-    esac
-  done <<< "$DIFF"
-
-  # Add and commit the changes to the private repo
-  echo "Committing changes to private repo..."
-  git -C "$REPO_PRIVATE_PATH" add .
-  git -C "$REPO_PRIVATE_PATH" commit -m "Sync changes from repo_public"
-
-  # Push the changes to the private repo
+  # Commit and push changes to private repo
   echo "Pushing changes to private repo..."
   git -C "$REPO_PRIVATE_PATH" push
 }
@@ -97,4 +63,4 @@ sync_changes() {
 # Execute all operations
 clone_repos
 pull_latest_changes
-sync_changes
+sync_commits
