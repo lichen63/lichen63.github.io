@@ -41,6 +41,8 @@ jobs:
     - name: Push to Private Repository
       run: |
         git remote add PrivateRepo https://x-access-token:${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}@github.com/lichen63/lichen63.github.io-private.git
+        git remote -v
         git fetch PrivateRepo main
+        git log --oneline -5
         git merge PrivateRepo/main --allow-unrelated-histories --no-edit
         git push PrivateRepo main
