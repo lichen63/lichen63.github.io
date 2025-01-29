@@ -50,9 +50,25 @@ sync_commits() {
 
   # Cherry-pick each unpushed commit into the private repo
   while IFS= read -r commit_hash; do
+    # Extract the commit hash
     COMMIT_ID=$(echo $commit_hash | awk '{print $1}')
-    echo "Cherry-picking commit $COMMIT_ID into private repo..."
+    
+    # Debugging: check if the commit hash is valid
+    echo "Trying to cherry-pick commit: $COMMIT_ID"
+
+    # Ensure the commit exists in the public repo
+    git -C "$REPO_PUBLIC_PATH" cat-file commit "$COMMIT_ID" >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      echo "Commit $COMMIT_ID does not exist in the public repo."
+      continue
+    fi
+
+    # Try cherry-picking the commit
     git -C "$REPO_PRIVATE_PATH" cherry-pick "$COMMIT_ID"
+    if [ $? -ne 0 ]; then
+      echo "Failed to cherry-pick commit $COMMIT_ID. Please check the commit hash or resolve conflicts manually."
+      continue
+    fi
   done <<< "$UNPUSHED_COMMITS"
 
   # Commit and push changes to private repo
