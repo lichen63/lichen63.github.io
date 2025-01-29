@@ -24,6 +24,14 @@ jobs:
         echo "Verifying token access..."
         curl -H "Authorization: token ${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}" https://api.github.com/repos/lichen63/lichen63.github.io-private
 
+    - name: Verify Token
+      run: echo ${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}
+
+    - name: Setup Git Config
+      run: |
+        git config --global user.name "SyncBot from Public Repo"
+        git config --global user.email "syncbot@github-actions.github.io"
+
     - name: Remove Workflow Files Before Sync
       run: |
         rm -rf .github/workflows
@@ -32,10 +40,7 @@ jobs:
 
     - name: Push to Private Repository
       run: |
-        git config --global user.name "SyncBot from Public Repo"
-        git config --global user.email "syncbot@github-actions.github.io"
         git remote add PrivateRepo https://x-access-token:${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}@github.com/lichen63/lichen63.github.io-private.git
-
         git fetch PrivateRepo main
         git merge PrivateRepo/main --allow-unrelated-histories --no-edit
         git push PrivateRepo main
