@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define repository paths
-REPO_PUBLIC_PATH="$HOME/Repos/lichen63.github.io"
-REPO_PRIVATE_PATH="$HOME/Repos/lichen63.github.io-private"
+REPO_PUBLIC_PATH="$HOME/Repos/lichen63.github.io"  # Path to the public repository
+REPO_PRIVATE_PATH="$HOME/Repos/lichen63.github.io-private"  # Path to the private repository
 
 # Navigate to the private repository
 cd "$REPO_PRIVATE_PATH" || exit
@@ -35,13 +35,13 @@ git push origin main  # Push changes to the public repository
 cd "$REPO_PRIVATE_PATH" || exit
 
 # Make sure the private repository is on the main branch
-git checkout main
+git checkout main  # Or use your main branch name, may be 'master'
 
 # Fetch the latest changes from the public repository
 git fetch public
 
 # Merge the changes from the public repository without opening an editor
-git merge --no-edit -m "[SYNC] $COMMIT_MSG" public/main
+git merge --no-edit -m "[SYNC] $COMMIT_MSG" public/main  # Replace 'main' with 'master' if needed
 
 # If there is a conflict, display an error message
 if [ $? -ne 0 ]; then
@@ -50,15 +50,19 @@ if [ $? -ne 0 ]; then
 fi
 
 # Check if there are exactly two recent commits (one with [SYNC], one without)
-NUM_COMMITS=$(git log --pretty=format:"%h" -n 2 | wc -l)
+NUM_COMMITS=$(git log --oneline -n 2 | wc -l)
 
 if [ "$NUM_COMMITS" -eq 2 ]; then
     echo "Removing the original commit and keeping only [SYNC] commit..."
-    git rebase -i HEAD~2 <<EOF
-pick second_commit_hash
-drop first_commit_hash
-EOF
-    git push origin main --force  # Force push to update the remote
+    
+    # Move HEAD back by one commit while keeping changes staged
+    git reset --soft HEAD~1  
+    
+    # Recommit using only [SYNC] message
+    git commit --amend -m "[SYNC] $COMMIT_MSG"  
+    
+    # Force push to update the remote repository
+    git push origin main --force  
 else
     # Push normally if there's only one commit
     git push origin main
