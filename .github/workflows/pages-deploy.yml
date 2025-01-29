@@ -31,35 +31,42 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # submodules: true
-          # If using the 'assets' git submodule from Chirpy Starter, uncomment above
-          # (See: https://github.com/cotes2020/chirpy-starter/tree/main/assets)
-
+          
+      - name: Check if repository is private
+        id: check_repo
+        run: |
+          echo "Repository visibility is: ${{ github.event.repository.private }}"
+          
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
+        if: ${{ github.event.repository.private == false }}  # Only proceed if the repo is public
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
           bundler-cache: true
+        if: ${{ github.event.repository.private == false }}  # Only proceed if the repo is public
 
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
+        if: ${{ github.event.repository.private == false }}  # Only proceed if the repo is public
 
       - name: Test site
         run: |
           bundle exec htmlproofer _site \
             \-\-disable-external \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+        if: ${{ github.event.repository.private == false }}  # Only proceed if the repo is public
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
+        if: ${{ github.event.repository.private == false }}  # Only proceed if the repo is public
 
   deploy:
     environment:
@@ -71,3 +78,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        if: ${{ github.event.repository.private == false }}  # Only proceed if the repo is public
