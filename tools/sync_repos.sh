@@ -49,23 +49,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Check if there are exactly two recent commits (one with [SYNC], one without)
-NUM_COMMITS=$(git log --oneline -n 2 | wc -l)
-
-if [ "$NUM_COMMITS" -eq 2 ]; then
-    echo "Removing the original commit and keeping only [SYNC] commit..."
-    
-    # Move HEAD back by one commit while keeping changes staged
-    git reset --soft HEAD~1  
-    
-    # Recommit using only [SYNC] message
-    git commit --amend -m "[SYNC] $COMMIT_MSG"  
-    
-    # Force push to update the remote repository
-    git push origin main --force  
-else
-    # Push normally if there's only one commit
-    git push origin main
-fi
+# Commit and push the changes to the private repository
+git push origin main
 
 echo "Synchronization complete!"
