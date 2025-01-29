@@ -49,7 +49,19 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Commit and push the changes to the private repository
-git push origin main  # Or use your main branch name, may be 'master'
+# Check if there are exactly two recent commits (one with [SYNC], one without)
+NUM_COMMITS=$(git log --pretty=format:"%h" -n 2 | wc -l)
+
+if [ "$NUM_COMMITS" -eq 2 ]; then
+    echo "Removing the original commit and keeping only [SYNC] commit..."
+    git rebase -i HEAD~2 <<EOF
+pick second_commit_hash
+drop first_commit_hash
+EOF
+    git push origin main --force  # Force push to update the remote
+else
+    # Push normally if there's only one commit
+    git push origin main
+fi
 
 echo "Synchronization complete!"
