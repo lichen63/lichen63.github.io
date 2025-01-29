@@ -1,54 +1,56 @@
 #!/bin/bash
 
 # Define repository paths
-REPO_PUBLIC_PATH="$HOME/Repos/lichen63.github.io"
-REPO_PRIVATE_PATH="$HOME/Repos/lichen63.github.io-private"
+REPO_PUBLIC_PATH="$HOME/Repos/lichen63.github.io"  # Path to the public repository
+REPO_PRIVATE_PATH="$HOME/Repos/lichen63.github.io-private"  # Path to the private repository
 
-# Function to add private remote if not already added
-add_private_remote() {
-  # Check if the private remote already exists
-  if ! git remote get-url private &>/dev/null; then
-    echo "Adding private remote..."
-    git remote add private https://github.com/lichen63/lichen63.github.io-private.git
-  else
-    echo "Private remote already exists."
-  fi
-}
+# Navigate to the private repository
+cd "$REPO_PRIVATE_PATH" || exit
 
-# Function to add, commit, and push changes
-push_changes() {
-  echo "Adding changes to staging area..."
-  git add .
+# Check if the 'public' remote exists in the private repository
+git remote get-url public &> /dev/null
 
-  # Prompt user to enter commit message
-  echo "Enter commit message: "
-  read -r commit_message
+# If the 'public' remote doesn't exist, add it
+if [ $? -ne 0 ]; then
+    echo "'public' remote not found. Adding it now..."
+    git remote add public https://github.com/lichen63/lichen63.github.io.git
+else
+    echo "'public' remote already exists."
+fi
 
-  # Check if commit message is empty
-  if [ -z "$commit_message" ]; then
-    echo "Commit message cannot be empty. Please try again."
+# Now, navigate to the public repository and push changes to main
+cd "$REPO_PUBLIC_PATH" || exit
+git checkout main  # Ensure you're on the main branch
+git add .  # Add all changes (adjust as necessary)
+
+# Ask user for a commit message to be used for both repositories
+echo "Enter the commit message for both the public and private repositories:"
+read COMMIT_MSG
+
+# Commit and push changes to the public repository
+git commit -m "$COMMIT_MSG"  # Commit with the provided message
+git push origin main  # Push changes to the public repository
+
+# Now, navigate back to the private repository
+cd "$REPO_PRIVATE_PATH" || exit
+
+# Make sure the private repository is on the main branch
+git checkout main  # Or use your main branch name, may be 'master'
+
+# Fetch the latest changes from the public repository
+git fetch public
+
+# Merge the changes from the public repository
+git merge public/main  # Replace 'main' with 'master' if that's the default branch
+
+# If there is a conflict, display an error message
+if [ $? -ne 0 ]; then
+    echo "Merge conflict occurred! Please resolve it manually."
     exit 1
-  fi
+fi
 
-  echo "Committing changes with message: $commit_message"
-  git commit -m "$commit_message"
+# Commit and push the changes to the private repository with [SYNC] prefix
+git commit -am "[SYNC] $COMMIT_MSG"
+git push origin main  # Or use your main branch name, may be 'master'
 
-  # Push to origin (public repo)
-  echo "Pushing changes to public repo..."
-  git push origin main
-
-  # Push to private repo
-  echo "Pushing changes to private repo..."
-  git push private main
-}
-
-# Main script execution
-cd "$REPO_PUBLIC_PATH" || { echo "Public repo path not found."; exit 1; }
-
-# Add private remote if not present
-add_private_remote
-
-# Add, commit, and push changes
-push_changes
-
-echo "Changes synced between public and private repositories."
+echo "Synchronization complete!"
