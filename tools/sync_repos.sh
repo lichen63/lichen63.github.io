@@ -37,8 +37,21 @@ push_changes() {
   echo "Pushing changes to public repo..."
   git push origin main
 
+  # Switch to private repo directory and commit changes with a different message
+  echo "Committing and pushing changes to private repo with a sync message..."
+  cd "$REPO_PRIVATE_PATH" || { echo "Private repo path not found."; exit 1; }
+
+  # Fetch latest changes from public repo
+  git fetch origin
+
+  # Checkout main branch of private repo and merge changes
+  git checkout main
+  git merge "$REPO_PUBLIC_PATH/main" --allow-unrelated-histories --no-edit
+
+  # Commit to private repo with the sync message
+  git commit --amend --no-edit -m "[SYNC] $commit_message"
+
   # Push to private repo
-  echo "Pushing changes to private repo..."
   git push private main
 }
 
