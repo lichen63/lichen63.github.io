@@ -42,7 +42,8 @@ jobs:
       run: |
         git remote add PrivateRepo https://x-access-token:${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}@github.com/lichen63/lichen63.github.io-private.git
         git remote -v
-        git fetch PrivateRepo main
+        curl -H "Authorization: token ${{ secrets.SYNC_PRIVATE_REPO_TOKEN }}" https://api.github.com/repos/lichen63/lichen63.github.io-private
+        git fetch PrivateRepo main || (echo "Fetch failed" && exit 1)
         git log --oneline -5
         git merge PrivateRepo/main --allow-unrelated-histories --no-edit
-        git push PrivateRepo main
+        git push PrivateRepo main || (echo "Push failed" && exit 1)
