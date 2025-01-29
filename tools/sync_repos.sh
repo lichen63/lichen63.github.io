@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define repository paths
-REPO_PUBLIC_PATH="$HOME/Repos/lichen63.github.io"  # Path to the public repository
-REPO_PRIVATE_PATH="$HOME/Repos/lichen63.github.io-private"  # Path to the private repository
+REPO_PUBLIC_PATH="$HOME/Repos/lichen63.github.io"
+REPO_PRIVATE_PATH="$HOME/Repos/lichen63.github.io-private"
 
 # Navigate to the private repository
 cd "$REPO_PRIVATE_PATH" || exit
@@ -35,13 +35,13 @@ git push origin main  # Push changes to the public repository
 cd "$REPO_PRIVATE_PATH" || exit
 
 # Make sure the private repository is on the main branch
-git checkout main  # Or use your main branch name, may be 'master'
+git checkout main
 
 # Fetch the latest changes from the public repository
 git fetch public
 
 # Merge the changes from the public repository without opening an editor
-git merge --no-edit -m "[SYNC] $COMMIT_MSG" public/main  # Replace 'main' with 'master' if needed
+git merge --no-edit -m "[SYNC] $COMMIT_MSG" public/main
 
 # If there is a conflict, display an error message
 if [ $? -ne 0 ]; then
