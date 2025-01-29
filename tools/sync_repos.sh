@@ -40,8 +40,8 @@ git checkout main  # Or use your main branch name, may be 'master'
 # Fetch the latest changes from the public repository
 git fetch public
 
-# Merge the changes from the public repository
-git merge public/main  # Replace 'main' with 'master' if that's the default branch
+# Merge the changes from the public repository without opening an editor
+git merge --no-edit -m "[SYNC] $COMMIT_MSG" public/main  # Replace 'main' with 'master' if needed
 
 # If there is a conflict, display an error message
 if [ $? -ne 0 ]; then
@@ -49,8 +49,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Commit and push the changes to the private repository with [SYNC] prefix
-git commit -am "[SYNC] $COMMIT_MSG"
+# Commit and push the changes to the private repository
 git push origin main  # Or use your main branch name, may be 'master'
 
 echo "Synchronization complete!"
