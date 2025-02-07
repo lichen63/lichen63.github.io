@@ -56,19 +56,19 @@ media_subpath: '/assets/posts/20250207'
 
 ## 2. 收录独立博客的网站
 
-- 博友圈: https://www.boyouquan.com/home
-- 中文独立博客列表: https://github.com/timqian/chinese-independent-blogs
-- 博客我们: https://blogwe.com
-- BlogFinder: https://bf.zzxworld.com
-- 个站商店: https://storeweb.cn
-- OurBlogs: https://ourblo.gs
+- 博友圈: [https://www.boyouquan.com/home](https://www.boyouquan.com/home)
+- 中文独立博客列表: [https://github.com/timqian/chinese-independent-blogs](https://github.com/timqian/chinese-independent-blogs)
+- 博客我们: [https://blogwe.com](https://blogwe.com)
+- BlogFinder: [https://bf.zzxworld.com](https://bf.zzxworld.com)
+- 个站商店: [https://storeweb.cn](https://storeweb.cn)
+- OurBlogs: [https://ourblo.gs](https://ourblo.gs)
 
 ## 3. 个人精选博客
 
-- DIYGod: https://diygod.cc
+- DIYGod: [https://diygod.cc](https://diygod.cc)
 
   优质的博主，不但技术出众，文章也写得好，年终总结的年度最佳颁奖写法很有意思，可惜已经近一年没更新了
 
-- 清羽飞扬: https://blog.liushen.fun
+- 清羽飞扬: [https://blog.liushen.fun](https://blog.liushen.fun)
 
   博客内容丰富，收集了很多有趣且实用的工具和资源
