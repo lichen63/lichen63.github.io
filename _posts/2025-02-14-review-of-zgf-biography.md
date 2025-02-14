@@ -1,6 +1,6 @@
 ---
 title: 《曾国藩传》读后感
-description: 曾国藩，中国两个半圣人中的半个，看一看，学一学
+description: 半圣之道，朴素尚拙，坚韧不拔，和光同尘
 author: Lichen
 date: 2025-02-14 15:00:00 +0800
 categories: [杂记, 读书]
