@@ -2,12 +2,12 @@
 title: 《曾国藩传》读后感
 description: 曾国藩，中国两个半圣人中的半个，看一看，学一学
 author: Lichen
-date: 2025-02-08 06:00:00 +0800
+date: 2025-02-14 15:00:00 +0800
 categories: [杂记, 读书]
 tags: [杂记, 读书, 读后感]
 pin: false
 published: true
-media_subpath: '/assets/posts/20250208'
+media_subpath: '/assets/posts/20250214'
 ---
 
 ## 1. 半个圣人
