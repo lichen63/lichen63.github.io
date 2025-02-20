@@ -72,3 +72,7 @@ media_subpath: '/assets/posts/20250207'
 - 清羽飞扬: [https://blog.liushen.fun](https://blog.liushen.fun)
 
   博客内容丰富，收集了很多有趣且实用的工具和资源
+
+- 张洪Heo: [https://blog.zhheo.com](https://blog.zhheo.com)
+
+  优质资源博主，推荐的Ice.app是Mac菜单栏管理神器
