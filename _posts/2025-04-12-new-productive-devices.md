@@ -1,6 +1,6 @@
 ---
 title: 新增设备
-description: 新增设备
+description: 记录下最近新增的设备
 author: Lichen
 date: 2025-04-12 08:30:00 +0800
 categories: [杂记, 随笔]
