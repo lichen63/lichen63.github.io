@@ -17,7 +17,7 @@ media_subpath: '/assets/posts/20250412'
 原本是先在apple store里下单，但一方面没有现货，需要等待，另一方面我在逛京东、淘宝时发现还可以用国补，而apple store里是原价，于是就果断了取消了取消了取消了订单，改为在京东上购买了，清单如下：
 
 - Mac Studio M4Max(16+40核) 64G + 1T：原价 23249，到手 21113.43，其中国补 2000
-- Samsung 玄龙骑士 32英寸 MiniLED G7 S32BG754NC：原价 3999，到手 3382.16，其中国补 616.84
+- Samsung Odyssey 32英寸 MiniLED G7 S32BG754NC：原价 3999，到手 3382.16，其中国补 616.84
 - Apple Magic Keyboard 带触控ID和数字键：原价 1249，到手 1234.86
 - Apple Magic Trackpad：原价 899，到手 891.51
 
@@ -43,7 +43,7 @@ media_subpath: '/assets/posts/20250412'
 - Air Pods 4 主动降噪
 - Apple Magic Keyboard
 - Apple Magic Trackpad
-- Samsung 玄龙骑士 32英寸 S32BG754NC
+- Samsung Odyssey 32英寸 S32BG754NC
 
 这么多设备，加上公司给的电脑，书房已经相当充实了，但这些设备零零总总加起来也很多钱了，感谢大喵的倾力支持，让我在不过一年多的时间里就配齐了一整套apple生态。记得很多年前，因为项目在做一款手游，优先可运行的只有android版，于是我弃掉了从大学开始用的iphone，转而买了部华为手机，后来配置了windows主机和surface，当时同样投入了不少钱。后来我换了工作，还是觉得苹果用起来更舒服，于是从去年开始又换了回来，陆陆续续一年多的时间，又因为搬家，就趁机扔掉和卖掉了大部分旧设备，然后从头开始把新设备一点点凑了起来，直到现在，基本齐全了。
 
